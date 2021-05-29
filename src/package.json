@@ -1,0 +1,31 @@
+{
+    "name": "buscador",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "scripts": {
+      "start": "nw .",
+      "prod": "nwbuild --plaforms win32,win64 --buildDir dist/ src/"
+    },
+    "keywords": [],
+    "author": "Danie Romero",
+    "license": "ISC",
+    "dependencies": {
+      "drivelist": "^9.2.4",
+      "open": "^8.2.0"
+    },
+    "chromium-args": "--mixed-context",
+    "window": {
+      "show": true,
+      "frame": true,
+      "width": 1000,
+      "height": 600,
+      "min_width": 800,
+      "min_height": 400,
+      "position": "center",
+      "resizable": true
+    },
+    "devDependencies": {
+      "nw": "^0.54.0-sdk"
+    }
+  }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/tailwind.css" rel="stylesheet">
+    <title>Buscador</title>
+</head>
+<body class="flex ">
+
+    <aside class="w-1/4 bg-gray-500 h-screen shadow">
+
+        <p class="p-2 bg-purple-600 text-white font-bold text-xl text-center h-16 "> Unidades </p>
+
+        <div class="">
+            <div class="bg-white shadow-xl">
+
+                <ul class="divide-y divide-gray-300" id="unidades-list" data-bind="unidades">
+                    <!-- <li class="p-4 hover:bg-gray-50 cursor-pointer hover:bg-purple-300"> Todas </li> -->
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <main class="h-screen w-3/4  overflow-y-auto">
+        <div class="h-16 bg-pink-600 w-full text-white flex align-middle shadow">
+
+            <div class="m-auto flex w-1/2 justify-center">
+                <input class="text-gray-400 p-2" type="text" name="buscar" id="buscar" placeholder="xxx">
+                <input class="bg-yellow-500 p-2 cursor-pointer" type="submit" value="Buscar" id="btn-buscar">
+            </div>
+        </div>
+
+        <table class="table-fixed px-4">
+            <thead>
+              <tr>
+                <th class="w-1/2 ...">Nombre</th>
+                <!-- <th class="w-1/4 ...">Author</th>
+                <th class="w-1/4 ...">Views</th> -->
+              </tr>
+            </thead>
+            <tbody id="tabla-cuerpo">
+              
+            </tbody>
+          </table>
+    </main>
+
+    <script src="./app.js"></script>
+</body>
+</html>
