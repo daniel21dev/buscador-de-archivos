@@ -2,17 +2,27 @@
 const fs = require('fs');
 const open = require('open');
 const abrirDir = require('./js/helpers/abrirDir');
+const { mostrarBusquedas, guardarBusquedas } = require('./js/helpers/busquedas');
 const getFiles = require('./js/helpers/getFiles');
 const mostrarArchivos = require('./js/helpers/mostrarArchivos');
 // elementos HTML
 const listaUnidades = document.querySelector('#unidades-list');
 const cuerpoTabla = document.querySelector('#tabla-cuerpo');
 const btnBuscar = document.querySelector('#btn-buscar');
+const listaBusquedas = document.querySelector('#busquedas');
+const barraBusqueda = document.querySelector('#buscar');
+
 // variables globales
 const letras = 'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z '.split(' ');
 let unidades = [];
 let archivosUnidad = null;
 let currentDir = '/';
+let busquedas = localStorage.getItem('busquedas') || [];
+
+/*
+fetch('./db/db.json')
+    .then( res => res.json() )
+    .then( data => busquedas = data.busquedas ) */
 
 // filtrar unidades 
 unidades = letras.filter( letra => {
@@ -50,18 +60,29 @@ cuerpoTabla.addEventListener('click', (e)=>{
         return abrirDir( currentDir );
     }
 })
+
 // acciona la busqueda
 btnBuscar.addEventListener('click', (e)=>{
     // revisa si no a seleccionado una unidad
     if( currentDir === '/'){
         alert('seleccione una unidad antes de buscar ');
     }
-
     const busqueda = document.querySelector('#buscar');
     // resetea la tabla
     cuerpoTabla.innerHTML = '';
     // filtra los archvios de la unidad 
     const archivosBusqueda = archivosUnidad.filter( archivo => archivo.includes( busqueda.value ) );
     mostrarArchivos( archivosBusqueda );
+    busquedas = guardarBusquedas( busquedas, busqueda.value )
 })
+
+barraBusqueda.addEventListener('focus',()=>{
+    mostrarBusquedas( busquedas );
+    listaBusquedas.style.display = 'block';
+});
+
+barraBusqueda.addEventListener('blur',()=>{
+    listaBusquedas.style.display = 'none';
+});
+
 
