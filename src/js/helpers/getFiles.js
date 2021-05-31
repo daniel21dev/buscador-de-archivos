@@ -12,7 +12,6 @@ function getFiles ( dir, files_ ){
         } else {
             const nameArr = name.split('/');
             nameArr.shift();
-            console.log( nameArr.join('/') );
             files_.push( nameArr.join('/') );
         }
     }

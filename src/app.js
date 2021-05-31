@@ -1,6 +1,8 @@
 // modulos
 const fs = require('fs');
 const open = require('open');
+const dl = require('drivelist');
+
 const abrirDir = require('./js/helpers/abrirDir');
 const { mostrarBusquedas, guardarBusquedas } = require('./js/helpers/busquedas');
 const getFiles = require('./js/helpers/getFiles');
@@ -15,14 +17,13 @@ const barraBusqueda = document.querySelector('#buscar');
 // variables globales
 const letras = 'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z '.split(' ');
 let unidades = [];
-let archivosUnidad = null;
+let archivosUnidad = [];
 let currentDir = '/';
-let busquedas = localStorage.getItem('busquedas') || [];
+let busquedas = [];
 
-/*
 fetch('./db/db.json')
     .then( res => res.json() )
-    .then( data => busquedas = data.busquedas ) */
+    .then( data => busquedas = data.busquedas )
 
 // filtrar unidades 
 unidades = letras.filter( letra => {
@@ -41,6 +42,7 @@ unidades.forEach( unidad =>{
 })
 // escucha cuando se hace click en una unidad
 listaUnidades.addEventListener('click',(e)=>{
+    console.log('click');
     try {
         currentDir = `${ e.target.innerText }:/`;
         abrirDir( currentDir );
@@ -73,8 +75,11 @@ btnBuscar.addEventListener('click', (e)=>{
     // filtra los archvios de la unidad 
     const archivosBusqueda = archivosUnidad.filter( archivo => archivo.includes( busqueda.value ) );
     mostrarArchivos( archivosBusqueda );
+
+    listaBusquedas.innerHTML = '';
     busquedas = guardarBusquedas( busquedas, busqueda.value )
 })
+
 
 barraBusqueda.addEventListener('focus',()=>{
     mostrarBusquedas( busquedas );
@@ -82,6 +87,7 @@ barraBusqueda.addEventListener('focus',()=>{
 });
 
 barraBusqueda.addEventListener('blur',()=>{
+    listaBusquedas.innerHTML = '';
     listaBusquedas.style.display = 'none';
 });
 

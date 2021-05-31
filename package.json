@@ -11,7 +11,6 @@
   "author": "Danie Romero",
   "license": "ISC",
   "dependencies": {
-    "drivelist": "^9.2.4",
     "open": "^8.2.0"
   },
   "chromium-args": "--mixed-context",

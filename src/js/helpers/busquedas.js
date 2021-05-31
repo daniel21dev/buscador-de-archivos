@@ -1,5 +1,15 @@
+const fs = require('fs');
+const path = require('path');
 
-const mostrarBusquedas = ( busquedas ) =>{
+const mostrarBusquedas = ( busquedas, listaBusquedas ) =>{
+
+    if( busquedas.length < 1){
+        const li = document.createElement('li');
+        li.classList.add('bg-green-300');
+        li.innerText = 'archivo no encontrado, verifique su busqueda';
+        return listaBusquedas.appendChild( li );
+    }
+
     busquedas.forEach( busqueda =>{
         const li = document.createElement('li');
         li.classList.add('cursor-pointer','hover:bg-green-300');
@@ -8,11 +18,14 @@ const mostrarBusquedas = ( busquedas ) =>{
     })
 }
 
-const guardarBusquedas = ( busquedas=[], nuevaBusqueda ) =>{
-    busquedas.push( nuevaBusqueda );
-    localStorage.setItem('busquedas', JSON.stringify( busquedas ));
-    return busquedas;
+const guardarBusquedas = ( busquedas , nuevaBusqueda ) =>{
+    if( !busquedas.includes( nuevaBusqueda ) ){
+        busquedas.push( nuevaBusqueda );
+        fs.writeFileSync( path.join(__dirname,'../../db/db.json'), JSON.stringify({ busquedas }) );
+        return busquedas;
+    }
 }
+
 
 
 module.exports = {
